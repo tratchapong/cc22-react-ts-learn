@@ -7,6 +7,11 @@ export const U3 = () => {
 		{ id: 2, name: 'bobby' },
 		{ id: 3, name: 'candy' },
 	]
+	const persons = [
+		{ p_id: 1, name: 'andy' },
+		{ p_id: 2, name: 'bobby' },
+		{ p_id: 3, name: 'candy' },
+	]
 	return (
 		<>
 			<div>Unit 3 : list</div>
@@ -18,14 +23,17 @@ export const U3 = () => {
 			<ListItem2 
 				items = {['HTML', 'CSS', 'Javascript']}
 				render={ item => <span>{item}</span> }
+				keyExtract={ item => item }
 			/>
 			<ListItem2 
 				items = {[4,5,6,7]}
 				render={ item => <span>{item}</span> }
+				keyExtract={ item => item }
 			/>
 			<ListItem2 
 				items={users}
-				render={ ()=>{}}
+				render={ (item)=> <span>{item.id}, {item.name}</span>}
+				keyExtract={ item=>item.id}
 			/>
 		</>
 	)
