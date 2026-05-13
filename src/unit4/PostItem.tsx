@@ -4,8 +4,8 @@ interface PostProps {
   post : Posts
 }
 
-export const PostItem = (props : PostProps) => {
-  const {id, title, body, userId} = props.post
+export const PostItem = ({ post }: PostProps) => {
+  const { id, title, body } = post
   return (
     <div className="collapse collapse-arrow bg-base-100 border border-base-300">
       <input type="radio" name="my-accordion-2" defaultChecked />
