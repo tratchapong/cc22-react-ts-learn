@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from 'zod'
@@ -15,17 +16,20 @@ const formInit = {
   password: ''
 }
 export const U5HookForm = () => {
-  const { register, handleSubmit, formState: { errors }, watch } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors }, watch, clearErrors } = useForm<FormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: formInit
   })
+  const timerRef = useRef<ReturnType<typeof setTimeout>>()
   const onSubmit = async (data: FormData) => {
+    clearTimeout(timerRef.current)
     try{
     const resp = await axios.post('https://httpbin.org/post', data)
     console.log(resp.data)
     }catch(err){
       console.error(err)
     }
+    timerRef.current = setTimeout(() => clearErrors(), 3000)
   }
 
   return (
